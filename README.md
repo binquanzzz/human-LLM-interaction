@@ -7,17 +7,17 @@ This repository contains the datasets, manual annotations, and source code for o
 
 ```text
 .
-├── MetaGPT-InCE/                    # Source code for InCE framework
+├── MetaGPT-InCE/                          # Source code for InCE framework
 │
-├── disentangled_filter_coding_data/ # Processed coding data (66,371 records)
+├── disentangled_filter_coding_data/       # Processed coding data (66,371 records)
 │
-├── disentangled_raw_data/           # Disentangled data without filtering (81,366 records)
+├── disentangled_raw_data/                 # Disentangled data without filtering (81,366 records)
 │
-├── manual_annotation/               # Labels for RQ1 and RQ2
+├── manual_annotation/                     # Labels for RQ1 and RQ2
 │
-├── raw_code_related_data/           # Original datasets (LMSYS-CHAT-1M, WildChat)
+├── raw_code_related_data/                 # Original datasets (LMSYS-CHAT-1M, WildChat)
 │
-├── sample_mult-turn/                # 378 sampled cases for analysis
+├── sample_mult-turn/                      # 378 sampled cases for analysis
 
 ```
 
@@ -27,23 +27,34 @@ This repository contains the datasets, manual annotations, and source code for o
 
   Contains the foundation datasets extracted from open-source corpora:
   
-  LMSYS-CHAT-1M.jsonl: Raw code-specific dialogue data.
+  LMSYS-CHAT-1M.jsonl
   
-  WildChat.jsonl: Raw code-specific dialogue data.
+  WildChat.jsonl
 
-## 2. **disentangled_filter_coding_data**
+## 2. **disentangled_raw_data**
 
-  Refined data that has been disentangled and filtered specifically for programming tasks:
+  This directory contains the full dataset after the disentanglement process. It consists of 81,366 records split across 16 files for easier handling:
+
+  disentangled_raw_data_1.jsonl
   
-  disentangled_filter_coding_data_all.jsonl
+  disentangled_raw_data_2.jsonl
+  
+  ...
+  
+  disentangled_raw_data_16.jsonl
+
+## 3. **disentangled_filter_coding_data**
+
+  This directory contains the final dataset used for analysis. These records were filtered from the disentangled data to strictly retain coding-related interactions. It consists of 66,371 records split across 14 files:
   
   disentangled_filter_coding_data_1.jsonl
 
-## 3. **disentangled_raw_data**
+  disentangled_filter_coding_data_1.jsonl
 
-  The dataset after the disentanglement process but before programming-specific filtering:
+  ...
+
+  disentangled_filter_coding_data_14.jsonl
   
-  disentangled_raw_data_all.jsonl: Contains the full set of 81,366 records.
 
 ## 4. **sample_mult-turn**
 
