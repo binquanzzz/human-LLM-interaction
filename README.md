@@ -23,41 +23,41 @@ This repository contains the datasets, manual annotations, and source code for o
 
 # 📝 Detailed Description
 
-1. raw_code_related_data
+1. **raw_code_related_data**
 
-Contains the foundation datasets extracted from open-source corpora:
+  Contains the foundation datasets extracted from open-source corpora:
+  
+  LMSYS-CHAT-1M.jsonl: Raw code-specific dialogue data.
+  
+  WildChat.jsonl: Raw code-specific dialogue data.
 
-LMSYS-CHAT-1M.jsonl: Raw code-specific dialogue data.
+2. **disentangled_filter_coding_data**
 
-WildChat.jsonl: Raw code-specific dialogue data.
+  Refined data that has been disentangled and filtered specifically for programming tasks:
+  
+  disentangled_filter_coding_data_all.jsonl
+  
+  disentangled_filter_coding_data_1.jsonl
 
-2. disentangled_filter_coding_data
+3. **disentangled_raw_data**
 
-Refined data that has been disentangled and filtered specifically for programming tasks:
+  The dataset after the disentanglement process but before programming-specific filtering:
+  
+  disentangled_raw_data_all.jsonl: Contains the full set of 81,366 records.
 
-disentangled_filter_coding_data_all.jsonl
+4. **sample_mult-turn**
 
-disentangled_filter_coding_data_1.jsonl
+  A curated collection of 378 sampled multi-turn interactions used for qualitative analysis.
 
-3. disentangled_raw_data
+5.** manual_annotation**
 
-The dataset after the disentanglement process but before programming-specific filtering:
+  Manually Annotated Data for Research Analysis:
+  
+  RQ1 Annotations: Identification of interaction smell types from real-world dialogues (sourced from LMSYS-CHAT-1M and WildChat).
+  
+  RQ2 Annotations: Distribution of interaction smells across six mainstream LLMs.
 
-disentangled_raw_data_all.jsonl: Contains the full set of 81,366 records.
-
-4. sample_mult-turn
-
-A curated collection of 378 sampled multi-turn interactions used for qualitative analysis.
-
-5. manual_annotation
-
-Manually Annotated Data for Research Analysis:
-
-RQ1 Annotations: Identification of interaction smell types from real-world dialogues (sourced from LMSYS-CHAT-1M and WildChat).
-
-RQ2 Annotations: Distribution of interaction smells across six mainstream LLMs.
-
-# 6. MetaGPT-InCE
+# **6. MetaGPT-InCE**
 
 
 
