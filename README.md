@@ -23,7 +23,7 @@ This repository contains the datasets, manual annotations, and source code for o
 
 # 📝 Detailed Description
 
-1. **raw_code_related_data**
+## 1. **raw_code_related_data**
 
   Contains the foundation datasets extracted from open-source corpora:
   
@@ -31,7 +31,7 @@ This repository contains the datasets, manual annotations, and source code for o
   
   WildChat.jsonl: Raw code-specific dialogue data.
 
-2. **disentangled_filter_coding_data**
+## 2. **disentangled_filter_coding_data**
 
   Refined data that has been disentangled and filtered specifically for programming tasks:
   
@@ -39,17 +39,17 @@ This repository contains the datasets, manual annotations, and source code for o
   
   disentangled_filter_coding_data_1.jsonl
 
-3. **disentangled_raw_data**
+## 3. **disentangled_raw_data**
 
   The dataset after the disentanglement process but before programming-specific filtering:
   
   disentangled_raw_data_all.jsonl: Contains the full set of 81,366 records.
 
-4. **sample_mult-turn**
+## 4. **sample_mult-turn**
 
   A curated collection of 378 sampled multi-turn interactions used for qualitative analysis.
 
-5.** manual_annotation**
+## 5.** manual_annotation**
 
   Manually Annotated Data for Research Analysis:
   
@@ -57,7 +57,7 @@ This repository contains the datasets, manual annotations, and source code for o
   
   RQ2 Annotations: Distribution of interaction smells across six mainstream LLMs.
 
-# **6. MetaGPT-InCE**
+## **6. MetaGPT-InCE**
 
 
 
