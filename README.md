@@ -17,7 +17,7 @@ This repository contains the datasets, manual annotations, and source code for o
 │
 ├── manual_annotation/                     # Labels for RQ1 and RQ2
 │
-├── MetaGPT-InCE/                          # Source code for InCE framework
+├── MetaGPT-InCE/                          # Source code for InCE framework (RQ3)
 
 ```
 
