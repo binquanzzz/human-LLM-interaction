@@ -77,9 +77,9 @@ pip install --upgrade metagpt
 **Execution**
 Run the multi-turn evaluation script with the following command:
 ```text
-python my_invar/main_multi_wildbench.py \
-  --jsonl_file my_invar/input_data/input_test.jsonl \
-  --output_file my_invar/output_data/deepseek-full-invar-output.jsonl \
+python InCE/main_multi_wildbench.py \
+  --jsonl_file InCE/input_data/input.jsonl \
+  --output_file InCE/output_data/output.jsonl \
   --n_round 11 \
   --real_time_save True
 ```
