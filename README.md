@@ -49,7 +49,7 @@ This repository contains the datasets, manual annotations, and source code for o
 
   A curated collection of 378 sampled multi-turn interactions used for qualitative analysis.
 
-## 5.**manual_annotation**
+## 5. **manual_annotation**
 
   Manually Annotated Data for Research Analysis:
   
