@@ -1,7 +1,8 @@
 # Interaction Smells in Human-LLM Collaborative Code Generation: Phenomena, Distribution, and Mitigation
 
 
-📂 Project Structure
+# 📂 Project Structure
+'''text
 .
 ├── raw_code_related_data/           # Original datasets (LMSYS-CHAT-1M, WildChat)
 ├── disentangled_filter_coding_data/ # Processed coding data (66,371 records)
