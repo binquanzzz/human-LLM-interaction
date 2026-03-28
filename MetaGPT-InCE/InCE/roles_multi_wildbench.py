@@ -100,17 +100,6 @@ class SimpleCoder(Role):
                 task_id=task_id,
                 round_index=self.round_count,
             )
-
-        resolved_constraints = []
-        if isinstance(smell_result, dict):
-            resolved_constraints = smell_result.get("resolved_constraints", []) or []
-        if not isinstance(resolved_constraints, list):
-            resolved_constraints = []
-        if not resolved_constraints and isinstance(smell_result, dict):
-            missing_constraints = smell_result.get("missing_constraints", []) or []
-            if isinstance(missing_constraints, list) and missing_constraints:
-                resolved_constraints = missing_constraints
-
         constraints_block = ""
         if resolved_constraints:
             constraints_lines = "\n".join([f"{idx + 1}. {item}" for idx, item in enumerate(resolved_constraints)])
@@ -132,19 +121,6 @@ class SimpleCoder(Role):
                 utils.safe_count_text_tokens(write_code_action.llm, memory_context),
                 utils.safe_count_text_tokens(write_code_action.llm, constraints_block),
             )
-        code = await write_code_action.run(
-            instruction,
-            history=history_block,
-            constraints=constraints_block,
-            task_id=task_id,
-            round_index=self.round_count,
-        )
-        if self.evaluation_results:
-            self.evaluation_results.add_output_tokens(
-                self.round_count,
-                utils.safe_count_output_tokens(write_code_action.llm, code or ""),
-            )
-
         result_msg = Message(
             content=code,
             role=self.profile,
@@ -262,34 +238,7 @@ class SimpleEvaluator(Role):
         all_satisfied = not evaluation_results.get('unsatisfied_items', []) if evaluation_results else False
 
 
-        if score is not None and score >= 9.0:
-            print(f"\n{'#' * 80}\nHIGH SCORE ACHIEVED ({score}/10) - STOPPING EXECUTION\n{'#' * 80}")
-
-            utils.TASK_COMPLETED = True
-            logger.info("SimpleEvaluator: High score reached, stopping execution")
-
-            if isinstance(self.rc.env, WorkflowEnvironment):
-                self.rc.env.mark_task_completed()
-                logger.info("SimpleEvaluator: Marked environment task as completed due to high score")
-
-            return Message(
-                content=f"Code achieved a high score of {score}/10. Stopping iterations early.",
-                role=self.profile,
-                cause_by=ComprehensiveEvaluate,
-                send_to={"Evaluator"}
-            )
-
-
-        elif all_satisfied:
-            print(f"\n{'#' * 80}\nALL CHECKLIST ITEMS SATISFIED!\n{'#' * 80}")
-
-            utils.TASK_COMPLETED = True
-            logger.info("SimpleEvaluator: Setting TASK_COMPLETED to True")
-
-            if isinstance(self.rc.env, WorkflowEnvironment):
-                self.rc.env.mark_task_completed()
-                logger.info("SimpleEvaluator: Marked environment task as completed")
-
+       
 
             return Message(
                 content=f"Code successfully meets all {len(self.checklist)} checklist requirements with a score of {score}/10!",
@@ -354,18 +303,6 @@ class WorkflowTeam(Team):
         else:
             print("None", flush=True)
         print(f"{'*' * 80}", flush=True)
-
-    async def run(self, n_round=3):
-        logger.info(f"Starting workflow with max {n_round} rounds")
-
-        evaluator_role = None
-        for role in self._roles:
-            if isinstance(role, SimpleEvaluator):
-                evaluator_role = role
-                break
-        if not evaluator_role:
-            logger.error("No SimpleEvaluator role found in team")
-            return
 
         evaluator_role.max_rounds = n_round
         utils.TASK_COMPLETED = False
