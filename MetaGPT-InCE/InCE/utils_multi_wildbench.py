@@ -237,9 +237,6 @@ class EvaluationResults(BaseModel):
         self._ensure_round_length(self.instruct_tokens, round_index)
         self._ensure_round_length(self.mem_tokens, round_index)
         self._ensure_round_length(self.inva_tokens, round_index)
-        self.instruct_tokens[round_index - 1] = int(instruct_tokens or 0)
-        self.mem_tokens[round_index - 1] = int(mem_tokens or 0)
-        self.inva_tokens[round_index - 1] = int(inva_tokens or 0)
 
     def add_output_tokens(self, round_index, output_tokens):
         self._ensure_round_length(self.output_tokens, round_index)
@@ -265,17 +262,6 @@ class EvaluationResults(BaseModel):
         duration = time.time() - start_time
         self._ensure_round_length(self.round_time, round_index)
         self.round_time[round_index - 1] = duration
-
-    @staticmethod
-    def _upsert_round_mem(container, round_index, mem_list):
-        if round_index is None:
-            return
-        mem_list = list(mem_list) if mem_list else []
-        for entry in container:
-            if entry.get("round") == round_index:
-                entry["mem"] = mem_list
-                return
-        container.append({"round": round_index, "mem": mem_list})
 
     @staticmethod
     def _ensure_round_length(container, round_index):
@@ -318,29 +304,6 @@ class EvaluationResults(BaseModel):
             },
 
         }
-
-
-    def summary(self):
-
-        if not self.score:
-            return "No evaluation data available."
-
-        result = "\n" + "=" * 80 + "\n"
-        result += f"EVALUATION SUMMARY FOR TASK: {self.id}\n"
-        result += "=" * 80 + "\n"
-
-        for round_num, score in enumerate(self.score, 1):
-            result += f"Round {round_num}: Score {score}/10\n"
-
-        numeric_scores = [s for s in self.score if isinstance(s, (int, float))]
-
-        if self.rounds > 0 and numeric_scores:
-            avg_score = sum(numeric_scores) / len(numeric_scores)
-            result += "-" * 80 + "\n"
-            result += f"Average Score: {avg_score:.1f}/10\n"
-        result += "=" * 80 + "\n"
-
-        return result
 
 
 def read_jsonl(file_path):
